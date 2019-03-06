@@ -1,1 +1,1 @@
-web:    java -jar target/TheProudBFF.jar
+web:    ./gradlew run
