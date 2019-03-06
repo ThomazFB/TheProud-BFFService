@@ -1,0 +1,5 @@
+{
+    "name": "The Proud BFF",
+    "description": "Provide to the mobile apps the data needed abstracting the backend infrastructure",
+    "image": "heroku/java"
+  }
