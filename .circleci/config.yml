@@ -1,0 +1,20 @@
+version: 2
+defaults: &defaults
+  working_directory: ~/code
+  docker:
+    - image: circleci/openjdk:11.0.2
+
+jobs:
+  buildBFF:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Load Dependencies and build
+          command: ./gradlew build
+
+workflows:
+  version: 2
+  integrate:
+    jobs:
+      - buildBFF
