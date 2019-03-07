@@ -14,7 +14,9 @@ import io.ktor.server.netty.Netty
 
 @Suppress("unused") // Referenced in application.conf
 fun main(args: Array<String>) {
-    val server = embeddedServer(Netty, loadEnvironmentConfiguration())
+    val server = Netty.create(loadEnvironmentConfiguration()) {
+
+    }
 
     server.application.apply {
         installDependencies()
