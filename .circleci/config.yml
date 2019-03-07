@@ -5,16 +5,27 @@ defaults: &defaults
     - image: circleci/openjdk:11.0.2
 
 jobs:
-  buildBFF:
+  build:
     <<: *defaults
     steps:
       - checkout
       - run:
-          name: Load Dependencies and build
+          name: Load Dependencies and Build
           command: ./gradlew build
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Run Unit Tests
+          command: ./gradlew test
 
 workflows:
   version: 2
   integrate:
     jobs:
-      - buildBFF
+      - build
+      - test:
+          requires:
+            - build

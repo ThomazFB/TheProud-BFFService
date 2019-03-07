@@ -1,8 +1,11 @@
 package com.theorangeteam
 
-import io.ktor.application.*
+import com.theorangeteam.game.GameRoute
+import io.ktor.application.Application
+import io.ktor.application.call
+import io.ktor.application.install
 import io.ktor.features.ContentNegotiation
-import io.ktor.jackson.jackson
+import io.ktor.gson.gson
 import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.routing
@@ -18,7 +21,9 @@ fun Application.module() {
 
 fun Application.installDependencies() {
     install(ContentNegotiation) {
-        jackson {}
+        gson {
+            setPrettyPrinting()
+        }
     }
 }
 
@@ -29,5 +34,6 @@ fun Application.defineRoutes() {
             call.respondText("The Proud Best Friend Forever")
         }
     }
+    GameRoute(this)
 }
 
