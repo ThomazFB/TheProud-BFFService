@@ -14,17 +14,20 @@ import io.ktor.server.netty.Netty
 
 @Suppress("unused") // Referenced in application.conf
 fun main(args: Array<String>) {
-    val server = embeddedServer(Netty, port = 8080) {
+    val server = embeddedServer(Netty, loadEnvironmentConfiguration())
+
+    server.application.apply {
         installDependencies()
         defineRoutes()
     }
+
     server.start(wait = true)
 }
 
 fun loadEnvironmentConfiguration(): ApplicationEngineEnvironment {
     return applicationEngineEnvironment {
         connector {
-
+            port = System.getenv("PORT").toInt()
         }
     }
 }
