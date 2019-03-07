@@ -38,8 +38,8 @@ fun Application.installDependencies() {
 fun Application.defineRoutes() {
 
     routing {
-        get("/something") {
-            call.respondText("OK")
+        get("/") {
+            call.respondText("The Proud Best Friend Forever")
         }
     }
 }
