@@ -1,9 +1,12 @@
-package com.theorangeteam.game
+package game
 
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.response.respond
-import io.ktor.routing.*
+import io.ktor.routing.get
+import io.ktor.routing.post
+import io.ktor.routing.route
+import io.ktor.routing.routing
 import java.net.HttpURLConnection
 
 class GameRoute(application: Application) {

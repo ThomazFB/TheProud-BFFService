@@ -1,6 +1,6 @@
 package com.theorangeteam
 
-import com.theorangeteam.game.GameRoute
+import game.GameRoute
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
@@ -15,6 +15,7 @@ import io.ktor.server.netty.EngineMain
 fun main(args: Array<String>) = EngineMain.main(args)
 
 fun Application.module() {
+    IGDBWrapper.userkey = System.getenv("IGDB_KEY")
     installDependencies()
     defineRoutes()
 }
