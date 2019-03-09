@@ -1,1 +1,1 @@
-web:    ./gradlew run
+web:    ./gradlew run -XX:MaxDirectMemorySize=512mb
