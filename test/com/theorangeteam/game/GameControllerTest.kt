@@ -1,22 +1,20 @@
-package game
+package com.theorangeteam.game
 
 import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.theorangeteam.JsonLoaderForTests
+import com.theorangeteam.contract.GameDatabase
 import com.theorangeteam.contract.Parser
-import com.theorangeteam.game.Game
-import contract.GameDatabase
+import game.GameController
 import org.junit.After
 import org.junit.Assert.assertArrayEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 import org.mockito.Mockito.validateMockitoUsage
-
+import org.mockito.MockitoAnnotations
 
 
 class GameControllerTest {

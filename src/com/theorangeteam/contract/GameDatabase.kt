@@ -1,6 +1,6 @@
-package contract
+package com.theorangeteam.contract
 
-import game.IGDBDatabase
+import com.theorangeteam.game.IGDBDatabase
 
 interface GameDatabase {
 
