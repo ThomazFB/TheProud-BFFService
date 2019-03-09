@@ -29,7 +29,7 @@ sourceSets {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'com.theorangeteam.Main'
+                'Main-Class': 'com.theorangeteam.Main',
         )
     }
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
@@ -42,19 +42,21 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "io.ktor:ktor-server-jetty:$ktor_version"
-    implementation "io.ktor:ktor-gson:$ktor_version"
-    implementation "ch.qos.logback:logback-classic:$logback_version"
-    implementation "com.squareup.moshi:moshi:1.8.0"
-    implementation 'com.github.husnjak:IGDB-API-JVM:0.5'
+    compile fileTree(include: ['*.jar'], dir: 'kotlin')
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "io.ktor:ktor-server-jetty:$ktor_version"
+    compile "io.ktor:ktor-gson:$ktor_version"
+    compile "ch.qos.logback:logback-classic:$logback_version"
+    compile "com.squareup.moshi:moshi:1.8.0"
+    compile 'com.github.husnjak:IGDB-API-JVM:0.5'
     
     testCompile "io.ktor:ktor-server-tests:$ktor_version"
     testCompile "junit:junit:4.12"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
+    testCompile "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
 }
 
-task stage(dependsOn: 'build')
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
 
 gradle.taskGraph.whenReady {
     taskGraph ->

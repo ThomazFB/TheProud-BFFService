@@ -1,1 +1,1 @@
-web:    ./gradlew run
+web:    java -jar build/libs/TheProudBFF-0.0.1.jar
