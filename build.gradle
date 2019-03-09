@@ -13,8 +13,8 @@ apply plugin: 'application'
 
 group 'TheProudBFF'
 version '0.0.1'
-mainClassName = "io.ktor.server.netty.EngineMain"
-applicationDefaultJvmArgs = ["-Xmx512m"]
+mainClassName = "io.ktor.server.jetty.EngineMain"
+applicationDefaultJvmArgs = ["-Xmx300m"]
 
 sourceSets {
     main.kotlin.srcDirs = main.java.srcDirs = ['src']
@@ -31,7 +31,7 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compile "io.ktor:ktor-server-netty:$ktor_version"
+    compile "io.ktor:ktor-server-jetty:$ktor_version"
     compile "io.ktor:ktor-gson:$ktor_version"
     compile "ch.qos.logback:logback-classic:$logback_version"
     implementation "com.squareup.moshi:moshi:1.8.0"
