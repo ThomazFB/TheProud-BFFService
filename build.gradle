@@ -34,9 +34,9 @@ dependencies {
     compile "io.ktor:ktor-gson:$ktor_version"
     compile "ch.qos.logback:logback-classic:$logback_version"
 
-    implementation(group = "com.github.kittinunf.fuel", name = "fuel", version = "-SNAPSHOT")
-    implementation(group = "com.github.kittinunf.fuel", name = "fuel-coroutines", version = "-SNAPSHOT")
-    implementation(group = "com.github.kittinunf.fuel", name = "fuel-kotlinx-serialization", version = "-SNAPSHOT")
+    implementation("com.github.kittinunf.fuel:fuel-SNAPSHOT")
+    implementation("com.github.kittinunf.fuel:fuel-coroutines-SNAPSHOT")
+    implementation("com.github.kittinunf.fuel:fuel-kotlinx-serialization-SNAPSHOT")
     implementation "com.squareup.moshi:moshi:1.8.0"
     implementation 'com.github.husnjak:IGDB-API-JVM:0.5'
     
