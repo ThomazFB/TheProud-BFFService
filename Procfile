@@ -1,1 +1,1 @@
-web:    ./gradlew run
+web:    ./gradlew run -x build
