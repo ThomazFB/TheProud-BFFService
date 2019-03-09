@@ -9,10 +9,6 @@ import io.ktor.gson.gson
 import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.routing
-import io.ktor.server.jetty.EngineMain
-
-@Suppress("unused") // Referenced in application.conf
-fun main(args: Array<String>) = EngineMain.main(args)
 
 fun Application.module() {
     IGDBWrapper.userkey = System.getenv("IGDB_KEY")
