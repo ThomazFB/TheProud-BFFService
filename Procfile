@@ -1,1 +1,1 @@
-web:    ./gradlew stage
+web:    ./gradlew run
