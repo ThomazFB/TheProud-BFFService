@@ -15,8 +15,10 @@ plugins {
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
+def app_version = System.getenv("PBFF_VERSION")
+
 group 'TheProudBFF'
-version '0.0.1'
+version app_version
 mainClassName = "io.ktor.server.jetty.EngineMain"
 
 sourceSets {

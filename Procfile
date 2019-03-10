@@ -1,1 +1,1 @@
-web:    java -jar build/libs/TheProudBFF-0.0.1.jar
+web:    java -jar build/libs/TheProudBFF-$PBFF_VERSION.jar
