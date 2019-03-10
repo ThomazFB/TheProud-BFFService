@@ -22,9 +22,9 @@ class GameParserTest {
     @Test
     fun shouldReturnListWithCorrectNames() {
         val expectedArray = listOf(
-            Game(name = "Illusion of Gaia"),
-            Game(name = "Quidditch Manager"),
-            Game(name = "Whitevale Defender")
+            Game(name = "Illusion of Gaia", cover = 62764),
+            Game(name = "Quidditch Manager", cover = 40564),
+            Game(name = "Whitevale Defender", cover = 0)
         ).toTypedArray()
         val receivedJson = JsonLoaderForTests().load("gameList.json")
         assertArrayEquals(expectedArray, gameParserUnderTest.parseGamesFromJson(receivedJson))
