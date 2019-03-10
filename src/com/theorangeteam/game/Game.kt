@@ -1,3 +1,3 @@
 package com.theorangeteam.game
 
-data class Game(val name: String)
+data class Game(val name: String, val cover: String)
