@@ -1,6 +1,6 @@
 package com.theorangeteam
 
-import game.GameRoute
+import com.theorangeteam.game.GameRoute
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
@@ -9,6 +9,14 @@ import io.ktor.gson.gson
 import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.routing
+import io.ktor.server.jetty.EngineMain
+
+
+class Main {
+    companion object {
+        @JvmStatic fun main(args: Array<String>) = EngineMain.main(args)
+    }
+}
 
 fun Application.module() {
     IGDBWrapper.userkey = System.getenv("IGDB_KEY")

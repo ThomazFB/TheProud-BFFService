@@ -10,4 +10,7 @@ open class Parser {
 
     inline fun <reified T> parseArrayFromJson(json: String): Array<T>? =
         loadAdapter<Array<T>>()?.fromJson(json)
+
+    inline fun <reified T> parseBFFModelFromJson(json: String): T? =
+            loadAdapter<T>()?.fromJson(json)
 }

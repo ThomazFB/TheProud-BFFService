@@ -4,9 +4,8 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.theorangeteam.JsonLoaderForTests
-import com.theorangeteam.contract.GameDatabase
+import com.theorangeteam.contract.GameRepository
 import com.theorangeteam.contract.Parser
-import game.GameController
 import org.junit.After
 import org.junit.Assert.assertArrayEquals
 import org.junit.Before
@@ -19,7 +18,7 @@ import org.mockito.MockitoAnnotations
 
 class GameControllerTest {
     private val requestedJson
-        get() = JsonLoaderForTests().load("gameList.json")
+        get() = JsonLoaderForTests.load("gameList.json")
 
     lateinit var gameControllerUnderTest: GameController
 
@@ -27,7 +26,7 @@ class GameControllerTest {
     lateinit var parserMock: Parser
 
     @Mock
-    lateinit var gameDBMock: GameDatabase
+    lateinit var gameDBMock: GameRepository
 
     @Before
     fun setUp() {

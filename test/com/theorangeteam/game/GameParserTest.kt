@@ -9,8 +9,11 @@ import org.junit.Test
 
 class GameParserTest {
 
-    private fun Parser.parseGamesFromJson(json: String): Array<Game>? =
+    private fun Parser.parseGameListFromJson(json: String): Array<Game>? =
         parseArrayFromJson(json)
+
+    private fun Parser.parseGameFromJson(json: String): Game? =
+        parseBFFModelFromJson(json)
 
     lateinit var gameParserUnderTest: Parser
 
@@ -20,13 +23,21 @@ class GameParserTest {
     }
 
     @Test
-    fun shouldReturnListWithCorrectNames() {
+    fun shouldReturnGameListWithCorrectInfo() {
         val expectedArray = listOf(
             Game(name = "Illusion of Gaia", cover = 62764),
             Game(name = "Quidditch Manager", cover = 40564),
             Game(name = "Whitevale Defender", cover = 0)
         ).toTypedArray()
-        val receivedJson = JsonLoaderForTests().load("gameList.json")
-        assertArrayEquals(expectedArray, gameParserUnderTest.parseGamesFromJson(receivedJson))
+        val receivedJson = JsonLoaderForTests.load("gameList.json")
+        assertArrayEquals(expectedArray, gameParserUnderTest.parseGameListFromJson(receivedJson))
     }
+
+    @Test
+    fun shouldReturnGameWithCorrectInfo() {
+        val expectedGame = Game(name = "Illusion of Gaia", cover = 62764)
+        val receivedJson = JsonLoaderForTests.load("game.json")
+        assertEquals(expectedGame, gameParserUnderTest.parseGameFromJson(receivedJson))
+    }
+
 }
