@@ -1,4 +1,4 @@
-package com.theorangeteam.igdb
+package com.theorangeteam.api.igdb
 
 import io.ktor.http.HeadersBuilder
 

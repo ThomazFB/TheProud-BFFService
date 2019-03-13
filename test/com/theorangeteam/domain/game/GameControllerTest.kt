@@ -1,11 +1,11 @@
-package com.theorangeteam.game
+package com.theorangeteam.domain.game
 
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.theorangeteam.JsonLoaderForTests
-import com.theorangeteam.contract.GameRepository
-import com.theorangeteam.translate.Parser
+import com.theorangeteam.contract.JsonAPI
+import com.theorangeteam.domain.translate.Parser
 import org.junit.After
 import org.junit.Assert.assertArrayEquals
 import org.junit.Before
@@ -26,13 +26,13 @@ class GameControllerTest {
     lateinit var parserMock: Parser
 
     @Mock
-    lateinit var gameDBMock: GameRepository
+    lateinit var DBMock: JsonAPI
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        gameControllerUnderTest = GameController(parserMock, gameDBMock)
-        whenever(gameDBMock.requestGameJsonListFromQuery(anyString())) doReturn requestedJson
+        gameControllerUnderTest = GameController(parserMock, DBMock)
+        whenever(DBMock.requestJsonListFromQuery(anyString())) doReturn requestedJson
     }
 
     @Test
@@ -44,7 +44,7 @@ class GameControllerTest {
     @Test
     fun shouldCallDatabaseWhenGameListIsCalled() {
         gameControllerUnderTest.loadGames()
-        verify(gameDBMock).requestGameJsonListFromQuery(anyString())
+        verify(DBMock).requestJsonListFromQuery(anyString())
     }
 
     @After

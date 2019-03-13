@@ -1,11 +1,11 @@
-package com.theorangeteam.igdb
+package com.theorangeteam.api.igdb
 
-import com.theorangeteam.contract.GameRepository
-import com.theorangeteam.igdb.IGDBConfiguration.Route.*
-import com.theorangeteam.igdb.IGDBConfiguration.Field.*
-import com.theorangeteam.igdb.IGDBConfiguration.endpoint
-import com.theorangeteam.igdb.IGDBConfiguration.loadGameRequestBody
-import com.theorangeteam.igdb.IGDBConfiguration.setupHeader
+import com.theorangeteam.contract.JsonAPI
+import com.theorangeteam.api.igdb.IGDBConfiguration.Route.*
+import com.theorangeteam.api.igdb.IGDBConfiguration.Field.*
+import com.theorangeteam.api.igdb.IGDBConfiguration.endpoint
+import com.theorangeteam.api.igdb.IGDBConfiguration.loadGameRequestBody
+import com.theorangeteam.api.igdb.IGDBConfiguration.setupHeader
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.apache.Apache
 import io.ktor.client.request.headers
@@ -13,11 +13,11 @@ import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import kotlinx.coroutines.runBlocking
 
-class IGDBRepository : GameRepository {
+class IGDBGameAPI : JsonAPI {
 
     private val httpClient by lazy { HttpClient(Apache) }
 
-    override fun requestGameJsonListFromQuery(query: String): String {
+    override fun requestJsonListFromQuery(query: String): String {
         return runBlocking {
             httpClient.post<String>("$endpoint${GameList.value}", block = {
                 headers { setupHeader(this) }
@@ -26,11 +26,11 @@ class IGDBRepository : GameRepository {
         }
     }
 
-    override fun requestSingleGame(gameID: Int): String {
+    override fun requestSingleObject(objectID: Int): String {
         return runBlocking {
             httpClient.post<String>("$endpoint${GameList.value}", block = {
                 headers { setupHeader(this) }
-                body = loadGameRequestBody(gameID)
+                body = loadGameRequestBody(objectID)
             })
         }
     }

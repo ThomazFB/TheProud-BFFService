@@ -1,4 +1,4 @@
-package com.theorangeteam.translate
+package com.theorangeteam.domain.translate
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi

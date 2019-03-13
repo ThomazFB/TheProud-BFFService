@@ -1,4 +1,4 @@
-package com.theorangeteam.translate
+package com.theorangeteam.domain.translate
 
 import org.junit.Before
 

@@ -1,4 +1,4 @@
-package com.theorangeteam.game
+package com.theorangeteam.domain.game
 
 import io.ktor.application.Application
 import io.ktor.application.call
@@ -8,11 +8,11 @@ import java.net.HttpURLConnection
 
 class GameRoute(application: Application) {
 
-    val gameController by lazy { GameController() }
+    private val gameController by lazy { GameController() }
 
     init {
         application.routing {
-            route("games") {
+            route("game") {
                 gameGetRoutes()
             }
         }
@@ -26,9 +26,10 @@ class GameRoute(application: Application) {
         }
 
         get("/{gameid}") {
-            gameController.loadSingleGame(Integer.valueOf(call.parameters["gameid"]))?.let {
+            val gameID = Integer.valueOf(call.parameters["gameid"])
+            gameController.loadSingleGame(gameID)?.let {
                 call.respond(it)
-            } ?: call.respond(HttpURLConnection.HTTP_INTERNAL_ERROR)
+            } ?: call.respond(HttpURLConnection.HTTP_NOT_FOUND)
         }
     }
 }

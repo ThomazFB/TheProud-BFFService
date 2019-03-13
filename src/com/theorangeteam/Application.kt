@@ -1,6 +1,8 @@
 package com.theorangeteam
 
-import com.theorangeteam.game.GameRoute
+import com.theorangeteam.api.firebase.FirebaseConfiguration
+import com.theorangeteam.domain.game.GameRoute
+import com.theorangeteam.domain.user.UserRoute
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
@@ -20,6 +22,7 @@ class Main {
 
 fun Application.module() {
     IGDBWrapper.userkey = System.getenv("IGDB_KEY")
+    FirebaseConfiguration.connect()
     installDependencies()
     defineRoutes()
 }
@@ -40,5 +43,6 @@ fun Application.defineRoutes() {
         }
     }
     GameRoute(this)
+    UserRoute(this)
 }
 

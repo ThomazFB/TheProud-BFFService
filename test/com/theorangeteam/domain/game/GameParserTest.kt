@@ -1,7 +1,7 @@
-package com.theorangeteam.game
+package com.theorangeteam.domain.game
 
 import com.theorangeteam.JsonLoaderForTests
-import com.theorangeteam.translate.Parser
+import com.theorangeteam.domain.translate.Parser
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Before
