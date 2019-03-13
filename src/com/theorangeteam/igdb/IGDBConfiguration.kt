@@ -4,9 +4,10 @@ import io.ktor.http.HeadersBuilder
 
 object IGDBConfiguration {
 
-    val endpoint = "https://api-v3.igdb.com"
+    const val endpoint = "https://api-v3.igdb.com"
 
-    private val gameFields = "fields ${Field.GameName.value},${Field.GameCover.value};"
+    private val gameFields = "fields " +
+            "${Field.GameName.value},${Field.GameCover.value};"
 
     fun setupHeader(builder: HeadersBuilder) =
             builder.apply {

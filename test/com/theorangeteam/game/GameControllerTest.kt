@@ -5,7 +5,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.theorangeteam.JsonLoaderForTests
 import com.theorangeteam.contract.GameRepository
-import com.theorangeteam.contract.Parser
+import com.theorangeteam.translate.Parser
 import org.junit.After
 import org.junit.Assert.assertArrayEquals
 import org.junit.Before

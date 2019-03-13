@@ -1,9 +1,9 @@
-package game
+package com.theorangeteam.game
 
 import com.theorangeteam.JsonLoaderForTests
-import com.theorangeteam.contract.Parser
-import com.theorangeteam.game.Game
-import org.junit.Assert.*
+import com.theorangeteam.translate.Parser
+import org.junit.Assert.assertArrayEquals
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
