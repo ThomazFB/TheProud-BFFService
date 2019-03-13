@@ -23,7 +23,7 @@ jobs:
       - checkout
       - run:
           name: Load Dependencies and Build
-          command: ./gradlew build
+          command: ./gradlew build -x test
       - *save_cache
 
   test:
