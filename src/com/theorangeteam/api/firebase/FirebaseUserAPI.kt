@@ -22,4 +22,8 @@ class FirebaseUserAPI {
 
         return auth.createUser(request)
     }
+
+    fun loadToken(firebaseUserID: String): String {
+        return auth.createCustomToken(firebaseUserID)
+    }
 }

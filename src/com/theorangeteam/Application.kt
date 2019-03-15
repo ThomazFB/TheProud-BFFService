@@ -45,4 +45,3 @@ fun Application.defineRoutes() {
     GameRoute(this)
     UserRoute(this)
 }
-
