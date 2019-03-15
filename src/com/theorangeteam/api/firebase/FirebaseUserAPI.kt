@@ -12,6 +12,10 @@ class FirebaseUserAPI {
         return auth.getUser(firebaseUserID)
     }
 
+    fun loadToken(firebaseUserID: String): String {
+        return auth.createCustomToken(firebaseUserID)
+    }
+
     fun createUser(email: String, password: String, username: String): UserRecord {
         val request = UserRecord.CreateRequest().apply {
             setEmail(email)
@@ -21,9 +25,5 @@ class FirebaseUserAPI {
         }
 
         return auth.createUser(request)
-    }
-
-    fun loadToken(firebaseUserID: String): String {
-        return auth.createCustomToken(firebaseUserID)
     }
 }

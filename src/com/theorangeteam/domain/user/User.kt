@@ -2,11 +2,10 @@ package com.theorangeteam.domain.user
 
 import com.google.firebase.auth.UserRecord
 
-class User(val name: String?, val email: String) {
+class User(val name: String?, val email: String, val token: String = "") {
 
     companion object {
-        fun fromRecord(firebaseUserRecord: UserRecord): User {
-            return User(firebaseUserRecord.displayName, firebaseUserRecord.email)
-        }
+        fun fromRecordWithToken(firebaseUserRecord: UserRecord, token: String): User =
+            User(firebaseUserRecord.displayName, firebaseUserRecord.email, token)
     }
 }

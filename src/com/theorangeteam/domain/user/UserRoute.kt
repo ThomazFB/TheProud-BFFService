@@ -14,30 +14,20 @@ class UserRoute(application: Application) {
     init {
         application.routing {
             route("user") {
-                getRoutes()
                 postRoutes()
             }
-        }
-    }
-
-    private fun Route.getRoutes() {
-        get("/{uid}") {
-            val userID = call.parameters["uid"].toString()
-            userController.login(userID)?.let {
-                call.respond(it)
-            } ?: call.respond(HttpURLConnection.HTTP_NOT_FOUND)
         }
     }
 
     private fun Route.postRoutes() {
         post("token") {
             call.receiveParameters()["uid"]?.let { userID ->
-                userController.generateToken(userID)?.let { token ->
-                    call.respond(token)
+                userController.login(userID)?.let { user ->
+                    call.respond(user)
                 } ?: call.respond(HttpURLConnection.HTTP_BAD_REQUEST)
-            } ?: call.respond(HttpURLConnection.HTTP_BAD_REQUEST)
-
+            } ?: call.respond(HttpURLConnection.HTTP_BAD_METHOD)
         }
+
         post("create") {
             val postParameters = call.receiveParameters()
         }
