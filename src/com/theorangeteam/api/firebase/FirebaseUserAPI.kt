@@ -12,6 +12,10 @@ class FirebaseUserAPI {
         return auth.getUser(firebaseUserID)
     }
 
+    fun loaderUserFromToken(firebaseToken: String): UserRecord {
+        return loadUser(auth.verifyIdToken(firebaseToken).uid)
+    }
+
     fun loadToken(firebaseUserID: String): String {
         return auth.createCustomToken(firebaseUserID)
     }

@@ -2,10 +2,12 @@ package com.theorangeteam
 
 import com.theorangeteam.api.firebase.FirebaseConfiguration
 import com.theorangeteam.domain.game.GameRoute
+import com.theorangeteam.domain.user.UserController
 import com.theorangeteam.domain.user.UserRoute
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
+import io.ktor.auth.*
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
 import io.ktor.response.respondText
@@ -31,6 +33,11 @@ fun Application.installDependencies() {
     install(ContentNegotiation) {
         gson {
             setPrettyPrinting()
+        }
+    }
+
+    install(Authentication) {
+        authentication {
         }
     }
 }

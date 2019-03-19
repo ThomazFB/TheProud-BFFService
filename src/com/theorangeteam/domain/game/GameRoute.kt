@@ -2,6 +2,8 @@ package com.theorangeteam.domain.game
 
 import io.ktor.application.Application
 import io.ktor.application.call
+import io.ktor.auth.authenticate
+import io.ktor.http.HttpMethod
 import io.ktor.response.respond
 import io.ktor.routing.*
 import java.net.HttpURLConnection
@@ -12,7 +14,7 @@ class GameRoute(application: Application) {
 
     init {
         application.routing {
-            route("game") {
+            route("game", HttpMethod.Get) {
                 gameGetRoutes()
             }
         }
