@@ -1,46 +1,33 @@
 package com.theorangeteam.domain.user
 
+import com.auth0.jwt.JWT
 import com.theorangeteam.api.firebase.FirebaseUserAPI
-import io.ktor.application.call
-import io.ktor.auth.AuthenticationPipeline
-import io.ktor.auth.UnauthorizedResponse
-import io.ktor.auth.UserIdPrincipal
-import io.ktor.auth.parseAuthorizationHeader
+import com.theorangeteam.domain.auth.Token
 import io.ktor.http.auth.HttpAuthHeader
-import io.ktor.response.respond
 
 class UserController(private val userAPI: FirebaseUserAPI = FirebaseUserAPI()) {
 
-    fun login(userID: String): User? {
+    fun createUserToken(userID: String): Token? {
         return try {
-            val token = userAPI.loadToken(userID)
-            val record = userAPI.loadUser(userID)
-            return User.fromRecordWithToken(record, token)
+            Token(userAPI.loadToken(userID))
         } catch (ex: Exception) {
             null
         }
     }
 
-    fun validate(token: String): User? {
+    private fun validateUserFromToken(token: String): User? {
         return try {
-            return User.fromRecordWithToken(userAPI.loaderUserFromToken(token), token)
+            val uid = JWT.decode(token).getClaim("uid")
+            return User.fromRecordWithToken(userAPI.loadUser(uid.asString()))
         } catch (ex: Exception) {
             null
         }
     }
 
-    private fun userFromHeader(authHeader: HttpAuthHeader?): User? {
-        return takeUnless { authHeader == null || authHeader.authScheme != "Bearer" }?.let {
-            validate(authHeader!!.render())
-        }
-    }
-
-    fun AuthenticationPipeline.bearerAuthentication(realm: String) {
-        intercept(AuthenticationPipeline.RequestAuthentication) { context ->
-            val authHeader = call.request.parseAuthorizationHeader()
-            userFromHeader(authHeader)?.let {
-                context.principal(UserIdPrincipal(name = it.name))
-            } ?: call.respond(UnauthorizedResponse())
+    fun validate(authHeader: HttpAuthHeader?): User? {
+        return takeUnless { authHeader == null || authHeader.authScheme != "Bearer" || authHeader !is HttpAuthHeader.Single }?.let {
+            val authHeaderSingle = authHeader as HttpAuthHeader.Single
+            validateUserFromToken(authHeaderSingle.blob)
         }
     }
 }

@@ -1,11 +1,13 @@
 package com.theorangeteam.domain.game
 
+import com.theorangeteam.authenticate
 import io.ktor.application.Application
 import io.ktor.application.call
-import io.ktor.auth.authenticate
-import io.ktor.http.HttpMethod
 import io.ktor.response.respond
-import io.ktor.routing.*
+import io.ktor.routing.Route
+import io.ktor.routing.get
+import io.ktor.routing.route
+import io.ktor.routing.routing
 import java.net.HttpURLConnection
 
 class GameRoute(application: Application) {
@@ -14,24 +16,29 @@ class GameRoute(application: Application) {
 
     init {
         application.routing {
-            route("game", HttpMethod.Get) {
+            route("game") {
                 gameGetRoutes()
+
             }
         }
     }
 
     private fun Route.gameGetRoutes() {
         get("/") {
-            gameController.loadGames()?.let {
-                call.respond(it)
-            } ?: call.respond(HttpURLConnection.HTTP_INTERNAL_ERROR)
+            authenticate(call) {
+                gameController.loadGames()?.let {
+                    call.respond(it)
+                } ?: call.respond(HttpURLConnection.HTTP_INTERNAL_ERROR)
+            }
         }
 
         get("/{gameid}") {
-            val gameID = Integer.valueOf(call.parameters["gameid"])
-            gameController.loadSingleGame(gameID)?.let {
-                call.respond(it)
-            } ?: call.respond(HttpURLConnection.HTTP_NOT_FOUND)
+            authenticate(call) {
+                val gameID = Integer.valueOf(call.parameters["gameid"])
+                gameController.loadSingleGame(gameID)?.let {
+                    call.respond(it)
+                } ?: call.respond(HttpURLConnection.HTTP_NOT_FOUND)
+            }
         }
     }
 }

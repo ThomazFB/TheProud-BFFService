@@ -22,8 +22,8 @@ class UserRoute(application: Application) {
     private fun Route.postRoutes() {
         post("token") {
             call.receiveParameters()["uid"]?.let { userID ->
-                userController.login(userID)?.let { user ->
-                    call.respond(user)
+                userController.createUserToken(userID)?.let { token ->
+                    call.respond(token)
                 } ?: call.respond(HttpURLConnection.HTTP_BAD_REQUEST)
             } ?: call.respond(HttpURLConnection.HTTP_BAD_METHOD)
         }
