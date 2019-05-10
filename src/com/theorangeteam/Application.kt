@@ -34,6 +34,7 @@ fun Application.module() {
     FirebaseConfiguration.connect()
     installDependencies()
     defineRoutes()
+    //test for Rômulo
 }
 
 fun Application.installDependencies() {
